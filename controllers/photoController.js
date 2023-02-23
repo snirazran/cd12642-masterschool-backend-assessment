@@ -41,8 +41,6 @@ const getPhotoByUser = async (req, res) => {
     let { data: images } = await axios.get(
       `${API}users/${username}/photos${API_KEY}`
     );
-
-    // console.log(images);
     if (images) {
       let newArray = images.map(({ id, user, description, urls }) => ({
         id,
