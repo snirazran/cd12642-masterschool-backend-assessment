@@ -32,7 +32,34 @@ const getPhotoById = async (req, res) => {
   }
 };
 
+// @desc Get Photo by username
+// @route GET /api/photos/user/:username
+// @access Public
+const getPhotoByUser = async (req, res) => {
+  try {
+    const username = req.params.username;
+    let { data: images } = await axios.get(
+      `${API}users/${username}/photos${API_KEY}`
+    );
+
+    // console.log(images);
+    if (images) {
+      let newArray = images.map(({ id, user, description, urls }) => ({
+        id,
+        username: user.username,
+        description: description ? description : 'No description provided.',
+        url: urls.raw,
+      }));
+      console.log(newArray);
+      res.status(200).send(newArray);
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getRawPhotos,
   getPhotoById,
+  getPhotoByUser,
 };
