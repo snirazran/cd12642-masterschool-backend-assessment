@@ -20,5 +20,7 @@ app.get('/', (req, res) => {
 app.use('/api/photos', photoRouter);
 app.use('/api/users', userRouter);
 app.use('/api/favoritephotos', favoritephotoRouter);
+
+//added error handler
 app.use(errorHandler);
 app.listen(port, () => console.log(`Server started on port ${port}`));
