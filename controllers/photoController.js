@@ -23,7 +23,8 @@ const getRawPhotos = async (req, res) => {
 const getPhotoById = async (req, res) => {
   try {
     const id = req.params.id;
-    let { data: images } = await axios.get(`${API}photos${API_KEY}:${id}`);
+    let { data: images } = await axios.get(`${API}photos/${id}${API_KEY}`);
+
     if (images) {
       res.status(200).send(images);
     }
